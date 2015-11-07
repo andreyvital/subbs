@@ -35,20 +35,11 @@ func main() {
 		}
 
 		if fi.IsDir() {
-			fmt.Printf("Directory: %s\n", abs)
-
-			files = append(
-				files,
-				fs.ReadDir(abs)...,
-			)
-		} else {
-			fmt.Printf("File: %s\n", abs)
-
-			files = append(
-				files,
-				abs,
-			)
+			files = append(files, fs.ReadDir(abs)...)
+			continue
 		}
+
+		files = append(files, abs)
 	}
 
 	client := opensubtitles.NewClient()
@@ -61,7 +52,7 @@ func main() {
 
 	wg.Add(len(files))
 
-	for _, path := range files {
+	for _, path := range util.FilterVideoFiles(files) {
 		go func(wg *sync.WaitGroup, path string) {
 			defer wg.Done()
 
@@ -108,7 +99,9 @@ func main() {
 
 			defer reader.Close()
 
-			writer, err := os.Create(util.SrtPath(path))
+			srt := util.SrtPath(path)
+
+			writer, err := os.Create(srt)
 
 			if err != nil {
 				return
@@ -117,7 +110,12 @@ func main() {
 			defer writer.Close()
 
 			_, err = io.Copy(writer, reader)
-			// feedback
+
+			if err != nil {
+				return
+			}
+
+			fmt.Println(filepath.Base(srt))
 		}(&wg, path)
 	}
 
