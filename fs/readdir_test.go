@@ -21,6 +21,8 @@ func TestReadEmptyDirectory(t *testing.T) {
 	files := fs.ReadDir(dir)
 
 	assert.Len(t, files, 0)
+
+	os.Remove(dir)
 }
 
 func TestReadDir(t *testing.T) {
@@ -39,4 +41,6 @@ func TestReadDir(t *testing.T) {
 	files := fs.ReadDir(dir)
 
 	assert.Len(t, files, 3)
+
+	os.RemoveAll(dir)
 }
