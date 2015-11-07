@@ -44,6 +44,12 @@ func (c *UnauthenticatedClientState) Authenticate(
 	), nil
 }
 
+func (c *UnauthenticatedClientState) Download(
+	subtitle Subtitle,
+) (SubtitleFile, error) {
+	return SubtitleFile{}, ErrNotAuthenticated
+}
+
 func (c *UnauthenticatedClientState) Search(
 	hash string,
 	languages []string,

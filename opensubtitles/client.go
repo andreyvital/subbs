@@ -7,10 +7,12 @@ import (
 )
 
 var (
-	ErrAuthenticationFailure = errors.New("Authentication failure")
-	ErrNotAuthenticated      = errors.New("Not authenticated")
-	ErrAlreadyAuthenticated  = errors.New("Already authenticated")
-	ErrNoLanguagesProvided   = errors.New("No languages were provided")
+	ErrAuthenticationFailure    = errors.New("Authentication failure")
+	ErrNotAuthenticated         = errors.New("Not authenticated")
+	ErrAlreadyAuthenticated     = errors.New("Already authenticated")
+	ErrNoLanguagesProvided      = errors.New("No languages were provided")
+	ErrUnableToSearchSubtitles  = errors.New("Unable to search for subtitles")
+	ErrUnableToDownloadSubtitle = errors.New("Unable to download subtitle")
 )
 
 const (
@@ -41,6 +43,10 @@ func (c *Client) Authenticate(user, password string) error {
 	return err
 }
 
-func (c *Client) Search(hash string, languages []string) (Subtitles, error) {
+func (c Client) Download(subtitle Subtitle) (SubtitleFile, error) {
+	return c.state.Download(subtitle)
+}
+
+func (c Client) Search(hash string, languages []string) (Subtitles, error) {
 	return c.state.Search(hash, languages)
 }

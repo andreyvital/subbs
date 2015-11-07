@@ -7,6 +7,8 @@ import (
 )
 
 type Subtitle struct {
+	IDSubtitle       string `xmlrpc:"IDSubtitle"`
+	IDSubtitleFile   string `xmlrpc:"IDSubtitleFile"`
 	ISO639           string `xmlrpc:"ISO639"`
 	LanguageName     string `xmlrpc:"LanguageName"`
 	MovieName        string `xmlrpc:"MovieName"`
