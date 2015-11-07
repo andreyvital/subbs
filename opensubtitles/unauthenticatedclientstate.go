@@ -30,7 +30,7 @@ func (c *UnauthenticatedClientState) Authenticate(
 		Token  string `xmlrpc:"token"`
 	}{}
 
-	if err := c.client.Call("LogIn", args, res); err != nil {
+	if err := c.client.Call("LogIn", args, &res); err != nil {
 		return nil, ErrAuthenticationFailure
 	}
 
