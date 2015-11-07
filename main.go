@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"sync"
 
+	"github.com/BurntSushi/toml"
+	"github.com/CentaurWarchief/subbs/config"
 	"github.com/CentaurWarchief/subbs/fs"
 	"github.com/CentaurWarchief/subbs/opensubtitles"
 	"github.com/CentaurWarchief/subbs/util"
@@ -42,9 +44,23 @@ func main() {
 		files = append(files, abs)
 	}
 
+	var config config.Config
+
+	wd, _ := os.Getwd()
+
+	if _, err := toml.DecodeFile(
+		filepath.Join(wd, "config.toml"),
+		&config,
+	); err != nil {
+		return
+	}
+
 	client := opensubtitles.NewClient()
 
-	if err := client.Authenticate("", ""); err != nil {
+	if err := client.Authenticate(
+		config.OS.User,
+		config.OS.Password,
+	); err != nil {
 		return
 	}
 
@@ -72,16 +88,10 @@ func main() {
 
 			subtitles, err := client.Search(
 				fmt.Sprintf("%x", hash),
-				// TODO: add a flag that allows user to specify languages
-				[]string{"eng", "pob"},
+				config.Languages,
 			)
 
-			if err != nil {
-				return
-			}
-
-			if len(subtitles) == 0 {
-				// feedback
+			if err != nil || len(subtitles) == 0 {
 				return
 			}
 
