@@ -72,7 +72,7 @@ func (c *AuthenticatedClientState) Download(subtitle Subtitle) (SubtitleFile, er
 		return SubtitleFile{}, err
 	}
 
-	if res.Status != "200 OK" {
+	if res.Status != StatusSuccess {
 		return SubtitleFile{}, ErrUnableToDownloadSubtitle
 	}
 

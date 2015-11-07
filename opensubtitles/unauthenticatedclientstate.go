@@ -34,14 +34,11 @@ func (c *UnauthenticatedClientState) Authenticate(
 		return nil, ErrAuthenticationFailure
 	}
 
-	if res.Status != "200 OK" {
+	if res.Status != StatusSuccess {
 		return nil, ErrAuthenticationFailure
 	}
 
-	return NewAuthenticatedClientState(
-		c.client,
-		res.Token,
-	), nil
+	return NewAuthenticatedClientState(c.client, res.Token), nil
 }
 
 func (c *UnauthenticatedClientState) Download(

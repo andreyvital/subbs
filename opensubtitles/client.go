@@ -16,6 +16,7 @@ var (
 )
 
 const (
+	StatusSuccess      = "200 OK"
 	DefaultOSUserAgent = "OSTestUserAgent"
 	DefaultOSLanguage  = "en"
 	OpenSubtitlesAPI   = "http://api.opensubtitles.org/xml-rpc"
