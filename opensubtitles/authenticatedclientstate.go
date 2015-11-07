@@ -28,5 +28,9 @@ func (c *AuthenticatedClientState) Search(
 	hash string,
 	languages []string,
 ) (Subtitles, error) {
+	if len(languages) == 0 {
+		return nil, ErrNoLanguagesProvided
+	}
+
 	return nil, nil
 }

@@ -10,6 +10,7 @@ var (
 	ErrAuthenticationFailure = errors.New("Authentication failure")
 	ErrNotAuthenticated      = errors.New("Not authenticated")
 	ErrAlreadyAuthenticated  = errors.New("Already authenticated")
+	ErrNoLanguagesProvided   = errors.New("No languages were provided")
 )
 
 const (
