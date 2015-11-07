@@ -1,8 +1,9 @@
 ## `subbs`
-**subbs** is a simple program written in Go which calculates a file hash and use it to search for corresponding subtitles. The differential is that it's entirely based on the hash instead of metadata.
+**subbs** is a simple program written in Go which calculates a file hash and use it to search for corresponding subtitle(s). The differential is that it's entirely based on the hash instead of metadata.
 
-<!-- ### Features
-- Scans directory matching `.mp4`, `.mkv` and `.avi` files; -->
+### Features
+- Scans directory matching `.mp4`, `.mkv` and `.avi` files;
+- Allows to specify preferred languages.
 
 ### Limitations
 - Only `.srt` supported;
