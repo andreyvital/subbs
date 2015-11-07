@@ -8,8 +8,8 @@ import (
 	"sync"
 
 	"github.com/BurntSushi/toml"
+	"github.com/CentaurWarchief/subbs/cmd"
 	"github.com/CentaurWarchief/subbs/config"
-	"github.com/CentaurWarchief/subbs/fs"
 	"github.com/CentaurWarchief/subbs/opensubtitles"
 	"github.com/CentaurWarchief/subbs/util"
 )
@@ -21,28 +21,7 @@ func main() {
 		return
 	}
 
-	var files []string
-
-	for _, arg := range args {
-		fi, err := os.Stat(arg)
-
-		if err != nil {
-			continue
-		}
-
-		abs, err := filepath.Abs(arg)
-
-		if err != nil {
-			continue
-		}
-
-		if fi.IsDir() {
-			files = append(files, fs.ReadDir(abs)...)
-			continue
-		}
-
-		files = append(files, abs)
-	}
+	files := util.FilterVideoFiles(cmd.ExtractFilesFromArgs(args))
 
 	var config config.Config
 
@@ -68,7 +47,7 @@ func main() {
 
 	wg.Add(len(files))
 
-	for _, path := range util.FilterVideoFiles(files) {
+	for _, path := range files {
 		go func(wg *sync.WaitGroup, path string) {
 			defer wg.Done()
 
