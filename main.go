@@ -88,7 +88,7 @@ func main() {
 
 			subtitles, err := client.Search(
 				fmt.Sprintf("%x", hash),
-				config.Languages,
+				config.OS.Languages,
 			)
 
 			if err != nil || len(subtitles) == 0 {

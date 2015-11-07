@@ -1,5 +1,4 @@
-Languages = ["eng"]
-
 [OS]
+Languages = ["eng"]
 User = ""
 Password = ""
