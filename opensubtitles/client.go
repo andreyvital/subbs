@@ -7,12 +7,12 @@ import (
 )
 
 var (
-	ErrAuthenticationFailure    = errors.New("Authentication failure")
-	ErrNotAuthenticated         = errors.New("Not authenticated")
-	ErrAlreadyAuthenticated     = errors.New("Already authenticated")
-	ErrNoLanguagesProvided      = errors.New("No languages were provided")
-	ErrUnableToSearchSubtitles  = errors.New("Unable to search for subtitles")
-	ErrUnableToDownloadSubtitle = errors.New("Unable to download subtitle")
+	ErrAuthenticationFailure    = errors.New("authentication failure")
+	ErrNotAuthenticated         = errors.New("not authenticated")
+	ErrAlreadyAuthenticated     = errors.New("already authenticated")
+	ErrNoLanguagesProvided      = errors.New("no languages were provided")
+	ErrUnableToSearchSubtitles  = errors.New("unable to search for subtitles")
+	ErrUnableToDownloadSubtitle = errors.New("unable to download subtitle")
 )
 
 const (

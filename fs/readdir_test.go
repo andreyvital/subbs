@@ -18,11 +18,9 @@ func TestReadEmptyDirectory(t *testing.T) {
 		return
 	}
 
-	files := fs.ReadDir(dir)
+	defer os.Remove(dir)
 
-	assert.Len(t, files, 0)
-
-	os.Remove(dir)
+	assert.Len(t, fs.ReadDir(dir), 0)
 }
 
 func TestReadDir(t *testing.T) {
@@ -34,13 +32,11 @@ func TestReadDir(t *testing.T) {
 		return
 	}
 
+	defer os.RemoveAll(dir)
+
 	ioutil.TempFile(dir, "1.mkv")
 	ioutil.TempFile(dir, "2.mp4")
 	ioutil.TempFile(dir, "3.avi")
 
-	files := fs.ReadDir(dir)
-
-	assert.Len(t, files, 3)
-
-	os.RemoveAll(dir)
+	assert.Len(t, fs.ReadDir(dir), 3)
 }

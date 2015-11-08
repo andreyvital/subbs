@@ -21,11 +21,11 @@ func TestExtractFilesFromArgs(t *testing.T) {
 		return
 	}
 
+	defer os.RemoveAll(dir)
+
 	ioutil.TempFile(dir, "/1.mkv")
 	ioutil.TempFile(dir, "/2.mkv")
 	ioutil.TempFile(dir, "/3.mkv")
-
-	defer os.RemoveAll(dir)
 
 	assert.Len(t, cmd.ExtractFilesFromArgs([]string{dir}), 3)
 }
