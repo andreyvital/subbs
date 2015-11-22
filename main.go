@@ -27,19 +27,13 @@ func main() {
 
 	wd, _ := os.Getwd()
 
-	if _, err := toml.DecodeFile(
-		filepath.Join(wd, "config.toml"),
-		&config,
-	); err != nil {
+	if _, err := toml.DecodeFile(filepath.Join(wd, "config.toml"), &config); err != nil {
 		return
 	}
 
 	client := opensubtitles.NewClient()
 
-	if err := client.Authenticate(
-		config.OS.User,
-		config.OS.Password,
-	); err != nil {
+	if err := client.Authenticate(config.OS.User, config.OS.Password); err != nil {
 		return
 	}
 
